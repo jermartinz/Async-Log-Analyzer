@@ -15,5 +15,6 @@ def main():
     for level, total in events.most_common():
         print(f"Level: {level}, Count: {total}")
 
+
 if __name__ == "__main__":
     main()
