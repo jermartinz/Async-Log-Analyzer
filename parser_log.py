@@ -1,30 +1,22 @@
-def parser_line(line):
-    sections = line.strip().split(' ', 3)
-    if len(sections) >= 4:
-        date = sections[0]
-        hour = sections[1]
-        level = sections[2]
-        message = sections[3]
-        return date, hour, level, message
-    return None
+from collections import Counter
+
+def parser_line(path_file):
+    line_logs = []
+    with open(path_file, 'r', encoding='utf-8') as file:
+        for line in file:
+            sections = line.strip().split(' ', 3)
+            if len(sections) >= 4:
+                date, hour, level, message = sections
+                line_logs.append((date, hour, level, message))
+    return line_logs
 
 def count_events(path_file):
-    counters = {"INFO": 0, "WARN": 0, "ERROR": 0, "DEBUG": 0}
-
-    with open(path_file, 'r') as file:
-        for line in file:
-            result = parser_line(line)
-            if result:
-                _, _, level, _ = result
-                if level in counters:
-                    counters[level] += 1
-    return counters
-
-result = parser_line("2025-09-10 20:23:59 ERROR Test Log_439")
-counts = count_events("sample.log")
+    logs = parser_line(path_file)
+    levels = [level for _, _, level, _ in logs]
+    return Counter(levels)
 
 if __name__ == "__main__":
-    test_line = "2025-09-10 20:23:59 ERROR Test Log_439"
+    test_line = "ERROR Test Log_xxxx"
     print(parser_line(test_line))
 
 

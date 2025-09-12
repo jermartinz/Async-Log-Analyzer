@@ -8,12 +8,12 @@ except ImportError as e:
 
 def main():
     log_file_path = "sample.log"
-    results = pl.parser_line("2025-09-10 20:23:59 ERROR Test Log_439")
-    counts = pl.count_events(log_file_path)
-    print("Parsed Line Result:", results)
-    print("Event Counts:")
-    for level, count in counts.items():
-        print(f"{level}: {count}")
+    lines = pl.parser_line(log_file_path)
+    for date, hour, level, message in lines:
+        print(f"Date: {date}, Hour: {hour}, Level: {level}, Message: {message}")
+    events = pl.count_events(log_file_path)
+    for level, total in events.most_common():
+        print(f"Level: {level}, Count: {total}")
 
 if __name__ == "__main__":
     main()
