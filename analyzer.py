@@ -4,6 +4,7 @@ import aiofiles
 
 
 async def file_analysis(log_files):
+    """Analyze a single log file asynchronously."""
     count_event = {"INFO": 0, "WARN": 0, "ERROR": 0, "DEBUG": 0}
     first_error = None
     last_error = None
@@ -47,6 +48,7 @@ async def file_analysis(log_files):
     }
 
 async def multi_file_analysis(log_files):
+    """Analyze multiple log files asynchronously."""
     tasks = [file_analysis(log_file) for log_file in log_files]
     results = await asyncio.gather(*tasks)
     return results
