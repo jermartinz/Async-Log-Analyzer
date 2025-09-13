@@ -17,7 +17,6 @@ This project is a tool that reads log files (like those from web servers, applic
 
 The idea is to build an analyzer that will:
 - Read log files asynchronously
-- Search for specific patterns (errors, IPs, etc.)
 - Count lines, errors, and events
 - Generate basic reports
 
